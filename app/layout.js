@@ -1,5 +1,6 @@
 import MainHeader from '@/components/main-header/main-header';
 import './globals.css';
+import { RouteChangeListener } from '@/components/route-change';
 
 export const metadata = {
 	title: 'NextLevel Food',
@@ -11,6 +12,7 @@ export default function RootLayout({ children }) {
 		<html lang='en'>
 			<body>
 				<MainHeader />
+				<RouteChangeListener />
 				{children}
 			</body>
 		</html>

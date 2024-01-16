@@ -1,8 +1,39 @@
+'use client';
+
 import Link from 'next/link';
 import styles from './page.module.css';
 import ImageSlideshow from '@/components/images/image-slideshow';
+import { useEffect, useRef } from 'react';
 
 export default function Home() {
+	useEffect(() => {
+		// Set up a global event listener
+		const handleEvent = () => {
+			document.body.style.opacity = 0;
+		};
+		window.addEventListener('pagehide', handleEvent);
+		console.log('jtzm');
+		return () => {
+			window.removeEventListener('pagehide', handleEvent);
+		};
+	}, []);
+
+	// const alternator = useRef(0);
+	// // Scroll slightly and alternate between pages to always invalidate image snapshot.
+	// // See {redacted} for explanation on this effect and the previous
+	// useEffect(() => {
+	// 	const slightScroll = () => {
+	// 		if (IOS()) {
+	// 			window.scrollTo({ left: 0, top: alternator.current });
+	// 			alternator.current = Number(!alternator.current);
+	// 		}
+	// 	};
+	// 	console.log('jtzm');
+	// 	router.events.on('routeChangeComplete', slightScroll);
+
+	// 	return () => router.events.off('routeChangeComplete', slightScroll);
+	// }, []);
+
 	return (
 		<>
 			<header className={styles.header}>

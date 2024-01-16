@@ -4,12 +4,16 @@ import Link from 'next/link';
 import styles from './page.module.css';
 import ImageSlideshow from '@/components/images/image-slideshow';
 import { useEffect, useRef } from 'react';
+import { useRouter } from 'next/router';
 
-export default function Home() {
+function Home() {
+	// const router = useRouter();
 	useEffect(() => {
 		// Set up a global event listener
 		const handleEvent = () => {
-			document.body.style.opacity = 0;
+			// document.body.style.opacity = 0;
+			alert('pagehide');
+			console.log('AJDE PICKO');
 		};
 		window.addEventListener('pagehide', handleEvent);
 		console.log('jtzm');
@@ -28,11 +32,15 @@ export default function Home() {
 	// 			alternator.current = Number(!alternator.current);
 	// 		}
 	// 	};
-	// 	console.log('jtzm');
-	// 	router.events.on('routeChangeComplete', slightScroll);
+	// 	console.log('router.isReady', router.isReady);
+	// 	if (router.isReady) {
+	// 		router.events.on('routeChangeComplete', slightScroll);
 
-	// 	return () => router.events.off('routeChangeComplete', slightScroll);
-	// }, []);
+	// 		return () => {
+	// 			router.events.off('routeChangeComplete', slightScroll);
+	// 		};
+	// 	}
+	// }, [router.isReady]);
 
 	return (
 		<>
@@ -67,3 +75,5 @@ export default function Home() {
 		</>
 	);
 }
+
+export default Home;

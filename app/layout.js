@@ -1,6 +1,7 @@
 import MainHeader from '@/components/main-header/main-header';
 import './globals.css';
-import { RouteChangeListener } from '@/components/route-change';
+import { NavigationEvents, RouteChangeListener } from '@/components/route-change';
+import { Suspense } from 'react';
 
 export const metadata = {
 	title: 'NextLevel Food',
@@ -12,7 +13,10 @@ export default function RootLayout({ children }) {
 		<html lang='en'>
 			<body>
 				<MainHeader />
-				<RouteChangeListener />
+				<Suspense fallback={null}>
+					<NavigationEvents />
+				</Suspense>
+
 				{children}
 			</body>
 		</html>

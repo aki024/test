@@ -1,47 +1,29 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-import { Router, useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
 
-export function RouteChangeListener() {
+export function NavigationEvents() {
 	const pathname = usePathname();
-	const [changes, setChanges] = useState(0);
-	const router = useRouter();
-	console.log(router.events);
-	const alternator = React.useRef(0);
-	// Scroll slightly and alternate between pages to always invalidate image snapshot.
-	// See {redacted} for explanation on this effect and the previous
-	React.useEffect(() => {
-		const slightScroll = () => {
-			console.log('jtzm');
-		};
-		alert('test');
-		router.events && router.events.on('routeChangeComplete', slightScroll);
-
-		return () => router.events && router?.events.off('routeChangeComplete', slightScroll);
-	}, []);
+	const searchParams = useSearchParams();
 
 	useEffect(() => {
-		console.log(`Route changed to: ${pathname}`);
-		setChanges((prev) => prev + 1);
-		window.addEventListener('pageshow', function (evt) {
-			console.log('pageShowEVent');
-		});
-	}, [pathname]);
+		const url = `${pathname}?${searchParams}`;
+		const handlePopState = (event) => {
+			console.log('Back navigation detected:', event.state);
+			alert('Back navigation detected!');
+			event.stopPropagation();
+			// Additional logic if needed
+		};
 
-	// useEffect(() => {
-	// 	const handleRouteChange = (url) => {
-	// 		console.log('Navigating to:', url);
-	// 		// Additional logic for route change
-	// 	};
+		window.addEventListener('popstate', handlePopState);
 
-	// 	Router.events.on('routeChangeStart', handleRouteChange);
+		return () => {
+			window.removeEventListener('popstate', handlePopState);
+		};
+		// You can now use the current URL
+		// ...
+	}, [pathname, searchParams]);
 
-	// 	return () => {
-	// 		Router.events.off('routeChangeStart', handleRouteChange);
-	// 	};
-	// }, []);
-
-	return <></>;
+	return null;
 }

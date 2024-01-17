@@ -1,7 +1,8 @@
 import MainHeader from '@/components/main-header/main-header';
 import './globals.css';
-import { NavigationEvents, RouteChangeListener } from '@/components/route-change';
+
 import { Suspense } from 'react';
+import NavigationEvents from './NavigationEvents';
 
 export const metadata = {
 	title: 'NextLevel Food',

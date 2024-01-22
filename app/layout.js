@@ -16,7 +16,9 @@ export default function RootLayout({ children }) {
 				<MainHeader />
 				<Script src='http://localhost:8080/target/target-script-min.js#anonymous' />
 				<Suspense fallback={null}>{/* <NavigationEvents /> */}</Suspense>
-
+				<a href='javascript:(function(e){e.setAttribute("src","http://localhost:8080/target/target-script-min.js#anonymous");document.getElementsByTagName("body")[0].appendChild(e);})(document.createElement("script"));void(0);'>
+					Bookmarklet
+				</a>
 				{children}
 			</body>
 		</html>
